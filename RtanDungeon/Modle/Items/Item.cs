@@ -7,26 +7,32 @@ using System.Threading.Tasks;
 
 namespace RtanDungeon.Modle.Items
 {
-    internal class Item
+    public abstract class Item
     {
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-
-        public Item(string name)
-        {
-            Name = name;
-            Description = "null";
-        }
+        protected string name;
+        protected string description;
 
         public Item(string name, string description)
         {
-            Name = name;
-            Description = description;
+            this.name = name;
+            this.description = description;
         }
 
         public virtual string GetDescription()
         {
-            return Description;
+            return description;
         }
+
+        public virtual string GetItemName()
+        {
+            return name;
+        }
+
+        public virtual string GetItemInformation()
+        {
+            return $"{GetItemName()} | {description}";
+        }
+
+        public abstract Item Clone();
     }
 }

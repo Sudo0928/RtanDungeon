@@ -1,4 +1,5 @@
-﻿using RtanDungeon.Utility;
+﻿using RtanDungeon.Modle.Stat;
+using RtanDungeon.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +8,54 @@ using System.Threading.Tasks;
 
 namespace RtanDungeon.Modle.Items
 {
-    internal class EquipItem : Item
+    public class EquipItem : Item
     {
-        public Stats Stats { get; protected set; }
+        public ExtraStat Stat { get; protected set; }
         public EquipSlot Slot { get; protected set; }
+        public bool IsEquipped { get; protected set; }
 
-        public EquipItem(string name, Stats stats, EquipSlot slot) : base(name)
+        public EquipItem(string name, string description, EquipSlot slot, ExtraStat stat) : base(name, description)
         {
-            Stats = stats;
+            Stat = stat;
             Slot = slot;
+            IsEquipped = false;
         }
 
-        public EquipItem(string name, Stats stats, EquipSlot slot, string description) : base(name, description)
+        public void SetEquipped(bool value)
         {
-            Stats = stats;
-            Slot = slot;
+            IsEquipped = value;
+        }
+
+        public void ToggleEquipped()
+        {
+            IsEquipped = !IsEquipped;
+        }
+
+        public override string GetItemName()
+        {
+            string s = name;
+            if (IsEquipped) s = "[E]" + s;
+            return s;
+        }
+
+        public string GetItemStatInformation()
+        {
+            string s = "";
+            if(Stat.Hp > 0) s += $"| 체력 +{Stat.Hp.ToString()} ";
+            if(Stat.AttackPower > 0) s += $"| 공격력 +{Stat.AttackPower.ToString()} ";
+            if(Stat.DefensePower > 0) s += $"| 방어력 +{Stat.DefensePower.ToString()} ";
+            return s;
+        }
+
+        public override string GetItemInformation()
+        {
+            string s = $"{GetItemName()} | {description} {GetItemStatInformation()}";
+            return s;
+        }
+
+        public override Item Clone()
+        {
+            return new EquipItem(name, description, Slot, Stat);
         }
     }
 }

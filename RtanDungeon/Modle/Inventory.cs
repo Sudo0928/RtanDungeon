@@ -1,13 +1,14 @@
 ﻿using RtanDungeon.Modle.Items;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace RtanDungeon.Modle
 {
-    internal class Inventory
+    public class Inventory
     {
         public EquipmentSlot EquipmentSlot { get; private set; }
 
@@ -27,6 +28,31 @@ namespace RtanDungeon.Modle
         public void RemoveItem(Item item)
         {
             items.Remove(item);
+        }
+
+        public string GetEquipItemListToString()
+        {
+            string s = "";
+
+            for(int i = 0; i < items.Count; i++)
+            {
+                if (items[i].GetType() != typeof(EquipItem)) continue;
+                s += $"- {i + 1} {items[i].GetItemInformation()} \n";
+            }
+
+            return s;
+        }
+
+        public string GetItemListToString()
+        {
+            string s = "";
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                s += $"- {i + 1} {items[i].GetItemInformation()} \n";
+            }
+
+            return s;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RtanDungeon.Modle.Character.Player;
+﻿using RtanDungeon.Manager;
+using RtanDungeon.Modle.Character.Player;
 using RtanDungeon.Scenes;
 using RtanDungeon.Utility;
 
@@ -10,12 +11,13 @@ namespace RtanDungeon
         {
             RegisterScenes();
 
-            SceneManager.Update(args);
+            SceneManager.Init();
         }
 
         private static void RegisterScenes()
         {
             SceneManager.RegisterScene("MainScene", new MainScene());
+            SceneManager.RegisterScene("VillageScene", new VillageScene());
             SceneManager.RegisterScene("DungeonScene", new DungeonScene());
         }
     }

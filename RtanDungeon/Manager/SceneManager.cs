@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RtanDungeon
+namespace RtanDungeon.Manager
 {
     public static class SceneManager
     {
@@ -13,21 +13,30 @@ namespace RtanDungeon
         private static bool isGameQuit = false;
         private static IScene? currentScene;
 
-        public static void Update(string[] args)
+        public static void Init()
+        {
+            string scene = scenes.First().Key;
+            LoadScene(scene);
+        }
+
+        public static void Start()
+        {
+            currentScene.Start();
+        }
+
+        public static void Update()
         {
             if (scenes.Count == 0) return;
 
-            currentScene = scenes.First().Value;
-
             while (!isGameQuit)
             {
-                currentScene.Main(args);
+                currentScene.Update();
             }
         }
 
         public static void RegisterScene(string sceneName, IScene scene)
         {
-            if(!scenes.ContainsKey(sceneName)) scenes.Add(sceneName, scene);
+            if (!scenes.ContainsKey(sceneName)) scenes.Add(sceneName, scene);
         }
 
         public static void LoadScene(string sceneName)
@@ -36,6 +45,8 @@ namespace RtanDungeon
             {
                 Console.Clear();
                 currentScene = scene;
+                Start();
+                Update();
             }
             else new Exception("Can not found scene");
         }

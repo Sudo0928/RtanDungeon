@@ -9,7 +9,17 @@ namespace RtanDungeon.Scenes
 {
     internal class DungeonScene : IScene
     {
-        public void Main(string[] args)
+        public string GetTitleName()
+        {
+            return "Dungeon";
+        }
+
+        public void Start()
+        {
+            
+        }
+
+        public void Update()
         {
             Console.WriteLine("Dungeon");
         }

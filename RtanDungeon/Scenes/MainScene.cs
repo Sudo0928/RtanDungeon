@@ -1,4 +1,5 @@
 ﻿using RtanDungeon.Interface;
+using RtanDungeon.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,22 @@ namespace RtanDungeon.Scenes
 {
     internal class MainScene : IScene
     {
-        public void Main(string[] args)
+        public string GetTitleName()
         {
-            Console.WriteLine("test");
+            return "Main";
+        }
+
+        public void Start()
+        {
+            
+        }
+
+        public void Update()
+        {
+            Console.WriteLine("MainScene");
 
             string command = Console.ReadLine();
-            if (command == "exit") SceneManager.LoadScene("DungeonScene");
+            if (command == "exit") SceneManager.LoadScene("VillageScene");
         }
     }
 }
