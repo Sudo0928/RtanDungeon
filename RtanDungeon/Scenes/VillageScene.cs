@@ -1,5 +1,4 @@
-﻿using RtanDungeon.Interface;
-using RtanDungeon.Manager;
+﻿using RtanDungeon.Manager;
 using RtanDungeon.Modle;
 using RtanDungeon.Modle.Character.Player;
 using RtanDungeon.Modle.Items;
@@ -12,38 +11,34 @@ using System.Threading.Tasks;
 
 namespace RtanDungeon.Scenes
 {
-    internal class VillageScene : IScene
+    internal class VillageScene : Scene
     {
-        private Player player;
-        private DataManager dataManager;
-        private Shop shop = new Shop();
+        private Shop? shop;
 
-        private delegate void View();
-        private View currentView;
-
-        public string GetTitleName()
+        public override string GetTitleName()
         {
             return "Village";
         }
 
-        public void Start()
+        public override void Start()
         {
-            player = GameManager.Instance.Player;
-            dataManager = GameManager.Instance.DataManager;
-
+            base.Start();
+            
             Init();
 
             currentView = new View(Village);
         }
 
-        public void Update()
+        public override void Update()
         {
             Console.Clear();
-            currentView();
+            currentView?.Invoke();
         }
 
         public void Init()
         {
+            shop = new Shop();
+
             shop.AddItem(dataManager.GetItem(1000), 50);
             shop.AddItem(dataManager.GetItem(1001), 250);
             shop.AddItem(dataManager.GetItem(1002), 500);
@@ -85,6 +80,9 @@ namespace RtanDungeon.Scenes
                     case 3:
                         currentView = new View(Shop);
                         break;
+                    case 4:
+                        SceneManager.LoadScene("DungeonScene");
+                        break;
                     case 5:
                         currentView = new View(Rest);
                         break;
@@ -92,103 +90,7 @@ namespace RtanDungeon.Scenes
                         dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
                         break;
                 }
-            }
-            else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-        }
-
-        public void Stat()
-        {
-            Console.WriteLine(dataManager.ViewDB.PlayerStat(player));
-            Console.Write(dataManager.ViewDB.InputField());
-            string input = Console.ReadLine();
-
-            if (Int32.TryParse(input, out var num))
-            {
-                switch (num)
-                {
-                    case 0:
-                        currentView = new View(Village);
-                        break;
-                    default:
-                        dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-                        break;
-                }
-            }
-            else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-        }
-
-        public void Inventory()
-        {
-            Console.WriteLine(dataManager.ViewDB.PlayerInventory(player));
-            Console.Write(dataManager.ViewDB.InputField());
-            string input = Console.ReadLine();
-
-            if(Int32.TryParse(input, out var num))
-            {
-                switch (num)
-                {
-                    case 0:
-                        currentView = new View(Village);
-                        break;
-                    case 1:
-                        currentView = new View(EquipManagement);
-                        break;
-                    case 2:
-                        currentView = new View(ActiveItemManagement);
-                        break;
-                    default:
-                        dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-                        break;
-                }
-            }
-            else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-        }
-
-        public void ActiveItemManagement()
-        {
-            Console.WriteLine(dataManager.ViewDB.ActiveItemManagement(player));
-            Console.Write(dataManager.ViewDB.InputField());
-            string input = Console.ReadLine();
-
-            if (Int32.TryParse(input, out var num))
-            {
-                if (num == 0) currentView = new View(Inventory);
-
-                if (0 < num && num <= player.Inventory.items.Count)
-                {
-                    Inventory inventory = player.Inventory;
-                    ActiveItem item = inventory.items[num - 1] as ActiveItem;
-                    if(item != null)
-                    {
-                        item.UseItem(player);
-                        inventory.RemoveItem(num - 1);
-                    }
-                    else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-                }
-            }
-            else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-        }
-
-        public void EquipManagement()
-        {
-            Console.WriteLine(dataManager.ViewDB.EquipManagement(player));
-            Console.Write(dataManager.ViewDB.InputField());
-            string input = Console.ReadLine();
-
-            if(Int32.TryParse(input, out var num))
-            {
-                if(num == 0) currentView = new View(Inventory);
-
-                if (0 < num && num <= player.Inventory.items.Count)
-                {
-                    Inventory inventory = player.Inventory;
-                    EquipItem item = inventory.items[num - 1] as EquipItem;
-                    if(item != null)
-                    {
-                        inventory.EquipmentSlot.ItemEquip(item);
-                    }
-                    else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
-                }
+                preView = new View(Village);
             }
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }

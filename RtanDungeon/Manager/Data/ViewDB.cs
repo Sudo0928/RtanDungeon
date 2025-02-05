@@ -34,8 +34,19 @@ namespace RtanDungeon.Manager.Data
                 "1. 상태 보기 \n" +
                 "2. 인벤토리 \n" +
                 "3. 상점 \n" +
+                "4. 던전입장 \n" +
                 "5. 휴식하기 \n" +
                 "0. 게임 종료 \n";
+        }
+
+        public string Dungeon()
+        {
+            return "스파르타 던전. \n" +
+                "이곳에서 던전에서의 활동을 결정할 수 있습니다. \n" +
+                "\n" +
+                "1. 상태 보기 \n" +
+                "2. 인벤토리 \n" +
+                "0. 돌아가기 \n";
         }
 
         public string PlayerStat(Player player)

@@ -1,4 +1,4 @@
-﻿using RtanDungeon.Interface;
+﻿using RtanDungeon.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +9,9 @@ namespace RtanDungeon.Manager
 {
     public static class SceneManager
     {
-        private static Dictionary<string, IScene> scenes = new Dictionary<string, IScene>();
+        private static Dictionary<string, Scene> scenes = new Dictionary<string, Scene>();
         private static bool isGameQuit = false;
-        private static IScene? currentScene;
+        private static Scene? currentScene;
 
         public static void Init()
         {
@@ -34,7 +34,7 @@ namespace RtanDungeon.Manager
             }
         }
 
-        public static void RegisterScene(string sceneName, IScene scene)
+        public static void RegisterScene(string sceneName, Scene scene)
         {
             if (!scenes.ContainsKey(sceneName)) scenes.Add(sceneName, scene);
         }

@@ -1,5 +1,4 @@
-﻿using RtanDungeon.Interface;
-using RtanDungeon.Manager;
+﻿using RtanDungeon.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +7,19 @@ using System.Threading.Tasks;
 
 namespace RtanDungeon.Scenes
 {
-    internal class MainScene : IScene
+    internal class MainScene : Scene
     {
-        public string GetTitleName()
+        public override string GetTitleName()
         {
             return "Main";
         }
 
-        public void Start()
+        public override void Start()
         {
             
         }
 
-        public void Update()
+        public override void Update()
         {
             Console.WriteLine("아무키나 눌러 시작");
             Console.ReadKey();
