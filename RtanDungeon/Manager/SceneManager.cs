@@ -50,5 +50,10 @@ namespace RtanDungeon.Manager
             }
             else new Exception("Can not found scene");
         }
+
+        public static void QuitGame()
+        {
+            isGameQuit = true;
+        }
     }
 }

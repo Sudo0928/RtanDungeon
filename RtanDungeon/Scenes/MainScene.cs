@@ -22,10 +22,9 @@ namespace RtanDungeon.Scenes
 
         public void Update()
         {
-            Console.WriteLine("MainScene");
-
-            string command = Console.ReadLine();
-            if (command == "exit") SceneManager.LoadScene("VillageScene");
+            Console.WriteLine("아무키나 눌러 시작");
+            Console.ReadKey();
+            SceneManager.LoadScene("VillageScene");
         }
     }
 }

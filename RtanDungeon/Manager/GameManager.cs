@@ -36,9 +36,6 @@ namespace RtanDungeon.Manager
             DataManager = new DataManager();
 
             Player = new Player("Rtan", new EntityStat(100, 10, 5), Job.WARRIOR);
-            Player.Inventory.AddItem(DataManager.GetItem(2001));
-            Player.Inventory.AddItem(DataManager.GetItem(2002));
-            Player.Inventory.AddItem(DataManager.GetItem(7000));
         }
     }
 }

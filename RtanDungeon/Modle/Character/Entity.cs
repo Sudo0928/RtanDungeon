@@ -15,6 +15,7 @@ namespace RtanDungeon.Modle.Character
             Level = 1;
             Stat = new EntityStat(10, 5, 100);
             Inventory = new Inventory();
+            Inventory.EquipmentSlot.OnChangeHp += OnChangeHp;
         }
 
         public Entity(string name, EntityStat stats)
@@ -23,6 +24,7 @@ namespace RtanDungeon.Modle.Character
             Level = 1;
             Stat = stats;
             Inventory = new Inventory();
+            Inventory.EquipmentSlot.OnChangeHp += OnChangeHp;
         }
 
         public string Name { get; protected set; }
@@ -55,6 +57,11 @@ namespace RtanDungeon.Modle.Character
         public uint GetTotalDefensePower()
         {
             return Inventory.EquipmentSlot.GetTotalDefenseStat() + Stat.DefensePower;
+        }
+
+        private void OnChangeHp(int changeHp)
+        {
+            Stat.MaxHp += (uint)changeHp;
         }
     }
 }

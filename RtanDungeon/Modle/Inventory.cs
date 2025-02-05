@@ -30,6 +30,11 @@ namespace RtanDungeon.Modle
             items.Remove(item);
         }
 
+        public void RemoveItem(int index)
+        {
+            items.RemoveAt(index);
+        }
+
         public string GetEquipItemListToString()
         {
             string s = "";
@@ -37,6 +42,19 @@ namespace RtanDungeon.Modle
             for(int i = 0; i < items.Count; i++)
             {
                 if (items[i].GetType() != typeof(EquipItem)) continue;
+                s += $"- {i + 1} {items[i].GetItemInformation()} \n";
+            }
+
+            return s;
+        }
+
+        public string GetActiveItemListToString()
+        {
+            string s = "";
+
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].GetType() != typeof(ActiveItem)) continue;
                 s += $"- {i + 1} {items[i].GetItemInformation()} \n";
             }
 

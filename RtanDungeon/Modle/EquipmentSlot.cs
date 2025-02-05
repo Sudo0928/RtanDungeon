@@ -13,13 +13,20 @@ namespace RtanDungeon.Modle
     {
         private EquipItem[] equipItems = new EquipItem[Enum.GetValues(typeof(EquipSlot)).Length];
 
+        public event Action<int>? OnChangeHp;
+
         public void ItemEquip(EquipItem item)
         {
             if (item == null) return;
 
             int index = (int)item.Slot;
+            int changeHp = 0;
 
-            if (equipItems[index] != null) equipItems[index].SetEquipped(false);
+            if (equipItems[index] != null)
+            {
+                equipItems[index].SetEquipped(false);
+                changeHp -= (int)equipItems[index].Stat.Hp;
+            }
 
             if (equipItems[index] == item)
             {
@@ -28,10 +35,12 @@ namespace RtanDungeon.Modle
             }
             else
             {
-                Console.WriteLine("test");
                 equipItems[index] = item;
                 equipItems[index].SetEquipped(true);
+                changeHp += (int)equipItems[index].Stat.Hp;
             }
+
+            if(changeHp != 0) OnChangeHp?.Invoke(changeHp);
         }
 
         public uint GetTotalHpStat()
@@ -100,7 +109,7 @@ namespace RtanDungeon.Modle
             else return "";
         }
 
-        public ExtraStat GetEquipItemStat()
+        public ExtraStat GetTotalEquipItemStat()
         {
             uint hp = GetTotalHpStat();
             uint damage = GetTotalDamageStat();
