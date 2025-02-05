@@ -30,10 +30,11 @@ namespace RtanDungeon.Manager.Data
             return "스파르타 마을에 오신 여러분 환영합니다. \n" +
                 "이곳에서 던전으로 들어가기전 활동을 할 수 있습니다. \n" +
                 "\n" +
-                "0. 게임 종료 \n" +
                 "1. 상태 보기 \n" +
                 "2. 인벤토리 \n" +
-                "3. 상점 \n";
+                "3. 상점 \n" +
+                "5. 휴식하기 \n" +
+                "0. 게임 종료 \n";
         }
 
         public string PlayerStat(Player player)
@@ -97,6 +98,15 @@ namespace RtanDungeon.Manager.Data
             $"[아이템 목록] \n" +
                 $"{shop.GetShopItemsToString()}" +
                 $"\n" +
+                $"0. 나가기 \n";
+        }
+
+        public string Rest(Player player)
+        {
+            return $"휴식하기 \n" +
+                $"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {player.CurrentGold} G)\n" +
+                $"\n" +
+                $"1. 휴식하기 \n" +
                 $"0. 나가기 \n";
         }
     }
