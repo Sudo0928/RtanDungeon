@@ -26,12 +26,13 @@ namespace RtanDungeon.Manager.Data
             { 2003, new EquipItem("녹슨 철제 검", "관리가 안 되어있어 상태가 안 좋다.", EquipSlot.WEAPON, new ExtraStat(0, 5, 0)) },
             { 2004, new EquipItem("낡은 철제 검", "낡지만 관리가 잘 되어 있어 그럭저럭 쓸만하다.", EquipSlot.WEAPON, new ExtraStat(0, 7, 0)) },
             { 2005, new EquipItem("철제 검", "철로 만들어진 검", EquipSlot.WEAPON, new ExtraStat(0, 10, 0)) },
+            { 2999, new EquipItem("엑스칼리버", "알 수 없는 재료로 만들어진 검. 사용자를 가리는 듯 하다.", EquipSlot.WEAPON, new ExtraStat(0, 99, 0)) },
             { 3000, new EquipItem("낡은 가죽 투구", "사용감이 많아 너덜너덜하다.", EquipSlot.HELMET, new ExtraStat(0, 0, 1)) },
             { 4000, new EquipItem("낡은 가죽 갑옷", "사용감이 많아 너덜너덜하다.", EquipSlot.CHESTPLATE, new ExtraStat(0, 0, 2)) },
             { 5000, new EquipItem("낡은 가죽 바지", "사용감이 많아 너덜너덜하다.", EquipSlot.LEGGINGS, new ExtraStat(0, 0, 2)) },
             { 6000, new EquipItem("낡은 가죽 신발", "사용감이 많아 너덜너덜하다.", EquipSlot.BOOTS, new ExtraStat(0, 0, 1)) },
             { 7000, new EquipItem("낡은 나무 팔찌", "사용감이 많아 너덜너덜하다.", EquipSlot.ACCESSORY, new ExtraStat(2, 0, 0)) },
-            { 9000, new EquipItem("개발자의 목걸이", "Error", EquipSlot.ACCESSORY, new ExtraStat(999, 999, 999)) },
+            { 9000, new EquipItem("개발자의 눈물", "Error", EquipSlot.ACCESSORY, new ExtraStat(999, 999, 999)) },
         };
     }
 }
