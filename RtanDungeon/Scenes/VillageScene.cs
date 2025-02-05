@@ -33,7 +33,7 @@ namespace RtanDungeon.Scenes
 
             Init();
 
-            currentView = new View(ViewVillage);
+            currentView = new View(Village);
         }
 
         public void Update()
@@ -63,7 +63,7 @@ namespace RtanDungeon.Scenes
             shop.AddItem(dataManager.GetItem(9000), 99999999);
         }
 
-        public void ViewVillage()
+        public void Village()
         {
             Console.WriteLine(dataManager.ViewDB.Village());
             Console.Write(dataManager.ViewDB.InputField());
@@ -77,13 +77,13 @@ namespace RtanDungeon.Scenes
                         SceneManager.QuitGame();
                         break;
                     case "1":
-                        currentView = new View(ViewStat);
+                        currentView = new View(Stat);
                         break;
                     case "2":
-                        currentView = new View(ViewInventory);
+                        currentView = new View(Inventory);
                         break;
                     case "3":
-                        currentView = new View(ViewShop);
+                        currentView = new View(Shop);
                         break;
                     default:
                         dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
@@ -93,7 +93,7 @@ namespace RtanDungeon.Scenes
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }
 
-        public void ViewStat()
+        public void Stat()
         {
             Console.WriteLine(dataManager.ViewDB.PlayerStat(player));
             Console.Write(dataManager.ViewDB.InputField());
@@ -104,7 +104,7 @@ namespace RtanDungeon.Scenes
                 switch (input)
                 {
                     case "0":
-                        currentView = new View(ViewVillage);
+                        currentView = new View(Village);
                         break;
                     default:
                         dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
@@ -114,7 +114,7 @@ namespace RtanDungeon.Scenes
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }
 
-        public void ViewInventory()
+        public void Inventory()
         {
             Console.WriteLine(dataManager.ViewDB.PlayerInventory(player));
             Console.Write(dataManager.ViewDB.InputField());
@@ -125,13 +125,13 @@ namespace RtanDungeon.Scenes
                 switch (input)
                 {
                     case "0":
-                        currentView = new View(ViewVillage);
+                        currentView = new View(Village);
                         break;
                     case "1":
-                        currentView = new View(ViewEquipManagement);
+                        currentView = new View(EquipManagement);
                         break;
                     case "2":
-                        currentView = new View(ViewActiveItemManagement);
+                        currentView = new View(ActiveItemManagement);
                         break;
                     default:
                         dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
@@ -141,7 +141,7 @@ namespace RtanDungeon.Scenes
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }
 
-        public void ViewActiveItemManagement()
+        public void ActiveItemManagement()
         {
             Console.WriteLine(dataManager.ViewDB.ActiveItemManagement(player));
             Console.Write(dataManager.ViewDB.InputField());
@@ -149,7 +149,7 @@ namespace RtanDungeon.Scenes
 
             if (Int32.TryParse(input, out var num))
             {
-                if (num == 0) currentView = new View(ViewInventory);
+                if (num == 0) currentView = new View(Inventory);
 
                 if (0 < num && num <= player.Inventory.items.Count)
                 {
@@ -166,7 +166,7 @@ namespace RtanDungeon.Scenes
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }
 
-        public void ViewEquipManagement()
+        public void EquipManagement()
         {
             Console.WriteLine(dataManager.ViewDB.EquipManagement(player));
             Console.Write(dataManager.ViewDB.InputField());
@@ -174,7 +174,7 @@ namespace RtanDungeon.Scenes
 
             if(Int32.TryParse(input, out var num))
             {
-                if(num == 0) currentView = new View(ViewInventory);
+                if(num == 0) currentView = new View(Inventory);
 
                 if (0 < num && num <= player.Inventory.items.Count)
                 {
@@ -190,7 +190,7 @@ namespace RtanDungeon.Scenes
             else dataManager.ViewDB.SendMessage("잘못된 입력 입니다.");
         }
 
-        public void ViewShop()
+        public void Shop()
         {
             Console.WriteLine(dataManager.ViewDB.Shop(player, shop));
             Console.Write(dataManager.ViewDB.InputField());
@@ -198,7 +198,7 @@ namespace RtanDungeon.Scenes
 
             if (Int32.TryParse(input, out var num))
             {
-                if (num == 0) currentView = new View(ViewVillage);
+                if (num == 0) currentView = new View(Village);
 
                 if (0 < num && num <= shop.Count)
                 {
