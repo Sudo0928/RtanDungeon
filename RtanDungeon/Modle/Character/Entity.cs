@@ -62,6 +62,7 @@ namespace RtanDungeon.Modle.Character
         private void OnChangeHp(int changeHp)
         {
             Stat.MaxHp += (uint)changeHp;
+            Stat.CheckHp();
         }
     }
 }

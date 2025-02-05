@@ -36,6 +36,7 @@ namespace RtanDungeon.Manager
             DataManager = new DataManager();
 
             Player = new Player("Rtan", new EntityStat(100, 10, 5), Job.WARRIOR);
+            Player.AddGold(99999999);
         }
     }
 }

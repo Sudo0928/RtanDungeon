@@ -26,5 +26,10 @@ namespace RtanDungeon.Modle.Stat
             if (MaxHp > CurrentHp + hp) CurrentHp += hp;
             else CurrentHp = MaxHp;
         }
+
+        internal void CheckHp()
+        {
+            if (MaxHp < CurrentHp) CurrentHp = MaxHp;
+        }
     }
 }
