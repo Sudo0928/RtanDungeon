@@ -15,7 +15,8 @@ namespace RtanDungeon.Manager.Data
         {
             Console.Clear();
             Console.WriteLine(message);
-            Thread.Sleep(700);
+            Console.WriteLine("\n계속 하려면 아무키나 누르세요.");
+            Console.ReadKey();
             Console.Clear();
         }
 

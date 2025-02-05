@@ -1,4 +1,5 @@
-﻿using RtanDungeon.Modle.Character.Player;
+﻿using RtanDungeon.Manager;
+using RtanDungeon.Modle.Character.Player;
 using RtanDungeon.Modle.Items;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,7 @@ namespace RtanDungeon.Modle
         {
             if (items[index].Item2 == 0)
             {
-                Message("이미 구매한 아이템입니다.");
+                GameManager.Instance.DataManager.ViewDB.SendMessage("이미 구매한 아이템입니다.");
             }
             else if(player.CurrentGold >= items[index].Item2)
             {
@@ -45,15 +46,8 @@ namespace RtanDungeon.Modle
             }
             else
             {
-                Message("Gold가 부족합니다.");
+                GameManager.Instance.DataManager.ViewDB.SendMessage("Gold가 부족합니다.");
             }
-        }
-
-        private void Message(string message)
-        {
-            Console.Clear();
-            Console.WriteLine(message);
-            Thread.Sleep(700);
         }
 
         public string GetShopItemsToString()
